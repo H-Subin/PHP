@@ -1,0 +1,54 @@
+/* 메인 콘텐트 */
+#main_content { position: relative; width: 1000px; height: 240px; margin: 0 auto; }
+
+/* 로그인 전 */
+/* 일기 css */
+#public_di { position: absolute; top: 30px; left: 50px; }
+#public_di h4 { width: 375px; font-size: 16px; padding-bottom: 5px; border-bottom: solid 1px #dddddd; }
+#public_di ul { margin-top: 20px; }
+#public_di li { margin-top: 8px; margin-left: 10px; }
+#public_di span { display: inline-block; }
+#public_di span:nth-child(1) { width: 180px; }
+#public_di span:nth-child(1) :hover {text-decoration: underline;}
+#public_di span:nth-child(2) { width: 80px; }
+#public_di span:nth-child(3) { width: 100px; }
+
+/* 독서록 css */
+#public_bo { position: absolute; top: 30px; left: 460px; }
+#public_bo h4 { width: 485px; font-size: 16px; padding-bottom: 5px; border-bottom: solid 1px #dddddd; }
+#public_bo ul { margin-top: 20px; }
+#public_bo li { margin-top: 8px; margin-left: 15px; }
+#public_bo span { display: inline-block; }
+#public_bo span:nth-child(1) { width: 180px; }
+#public_bo span:nth-child(1) :hover {text-decoration: underline;}
+#public_bo span:nth-child(2) { width: 100px; }
+#public_bo span:nth-child(3) { width: 80px; }
+#public_bo span:nth-child(4) { width: 100px; }
+
+
+
+#main_content { position: relative; width: 1000px; height: 240px; margin: 0 auto; }
+
+/* 로그인 후 */
+/* 일기장 css */
+#private_di { position: absolute; top: 30px; left: 50px; }
+#private_di h4 { width: 425px; font-size: 16px; padding-bottom: 5px; border-bottom: solid 1px #dddddd; }
+#private_di ul { margin-top: 20px; }
+#private_di li { margin-top: 8px; margin-left: 10px; }
+#private_di span { display: inline-block; }
+#private_di span:nth-child(1) { width: 300px; }
+#private_di span:nth-child(1) :hover {text-decoration: underline;}
+#private_di span:nth-child(2) { width: 100px; }
+
+/* 독서록 css */
+#private_bo { position: absolute; top: 30px; left: 515px; }
+#private_bo h4 { width: 425px; font-size: 16px; padding-bottom: 5px; border-bottom: solid 1px #dddddd; }
+#private_bo ul { margin-top: 20px; }
+#private_bo li { margin-top: 8px; margin-left: 15px; }
+#private_bo span { display: inline-block; }
+#private_bo span:nth-child(1) { width: 200px; }
+#private_bo span:nth-child(1) :hover {text-decoration: underline;}
+#private_bo span:nth-child(2) { width: 100px; }
+#private_bo span:nth-child(3) { width: 100px; }
+#private_bo span:nth-child(4) { width: 100px; }
+

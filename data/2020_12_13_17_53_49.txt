@@ -1,0 +1,269 @@
+#상명대학교 스마트정보통신공학과
+#Web Development
+
+곽문기
+kmoonki@naver.com
+
+-------- 일정 (각 30분) ----------
+1. 웹표준, bootstrap
+2. jQuery with bootstrap
+3. 서버환경구축 - Apache HTTPD + PHP + MySQL + phpMyAdmin 
+4. Ajax, mashup (kakao map, tourAPI, kakao search)
+5. PHP 핵심 - Form, CRUD, Cookie & Session, Login System
+6. Modern JS
+`Javascript API - JS promise, webRTC, WebSocket, Server-Sent Event, service worker
+`Web Framework (vue.js, node.js, react.js, angular.js)
+
+==========================================================================
+*도구
+1. Text Editor - 비주얼 스튜디오 코드 (visual studio code) https://code.visualstudio.com/
+`extension - 한글팩(korean), open in browser, live server
+`emmet (default extension) - https://docs.emmet.io/cheat-sheet/
+2. Text Editor - SublimeText 3 https://www.sublimetext.com/3
+3. 이미지 Editor - picpick https://picpick.app/ko
+4. zip - 반디집 https://kr.bandisoft.com/bandizip/
+5. 크롬 웹스토어 (익스텐션) - goFullPage, JSON Formatter
+6. code share notepad.pw => https://notepad.pw/smu2020
+
+http://darum.daum.net/
+https://nuli.navercorp.com/
+
+==========================================
+#1. 웹표준, bootstrap (1/6)
+
+https://www.w3.org/
+https://www.w3schools.com/
+https://developer.mozilla.org/ko/
+https://getbootstrap.com/
+https://htmlreference.io/
+https://cssreference.io/
+
+*웹표준 - HTML, CSS, JS - 역할(role) - 기능, 성능, 제약사항
+`HTML - Structure (뼈대)
+`CSS - Presentation (표현)
+`JS - Behavior (동작, 이벤트)
+
+*웹 원리 및 구성
+`클라이언트 (요청 request, 브라우저) vs. 서버 (응답 response) - 역할(role)
+`Client(Browser) --(Request)--> Server --(Response)--> Client (Rendering)
+`Front-End vs. Back-End
+
+*웹표준 학습
+1)block element vs. inline element - <div> vs. <span>
+2)box model - padding, margin, border, text-node - width 결정! (box-sizing)
+3)selector(선택자) - 가장중요*****, 식별자(identifier) - class vs. id => js
+`https://www.w3schools.com/cssref/css_selectors.asp
+`가계도 => parent, child, siblings
+4)float - 영역만들기 (layout) -> grid, flexbox 
+5)position - 위치설정 - relative(상대) vs. absolute(절대) - 기준
+6)layout - publish(er) --> PSD2HTML
+
+
+<i> vs. <em>
+<b> vs. <strong>
+
+반응형(responsive) vs. 적응형(adaptive)
+
+image sprite
+
+==========================================
+#2. jQuery with bootstrap (2/6)
+
+jQuery => javascript를 편리/쉽게 사용하는 방법 => javascript framework (library)
+https://jquery.com/
+
+API => (프로그램) 사용설명서 - 메서드 이름, 전달변수(매개변수, parameter), 결과(return), 설명
+
+getter vs. setter
+
+===============================================================
+#3. 서버환경구축 - Apache HTTPD + PHP + MySQL + phpMyAdmin (3/6)
+cf. https://www.apachefriends.org/
+
+*아파치 웹서버 설치
+1) (윈도우) IIS 설치 여부 확인 (port 충돌) -> 비활성화
+
+2) 아파치 웹서버 다운로드 - https://www.apachelounge.com
+`폴더 구성 -> C:/_server
+`다운로드#1 - 시스템 종류 확인 (32bit/64bit)하여 알맞는것 다운로드 - Apache 2.4.46 Win64
+`다운로드#2 - VC++ runtime 환경 다운로드 - VC_redist.x64.exe
+
+3) 설치 - 웹서버 -> 여기에 풀기  C:/_server/Apache24
+
+4) 웹서버 환경설정 - httpd.conf
+37라인 Define SRVROOT "C:/_server/Apache24"
+227라인 ServerName localhost:80
+
+5) 웹서버 실행 - 도스창(CMD) 관리자권한으로 열기, cd (change directory), >d:
+C:/WINDOWS/system32>cd ../../_server/Apache24/bin
+C:/_server/Apache24/bin>httpd.exe -k install
+`확인) 제어판 > 관리도구 > 서비스
+`서버동작확인) 브라우저에서 http://localhost 
+
+6) 아파치 모니터
+
+
+*PHP 설치하기
+1) PHP 다운로드 https://windows.php.net/  -> VC15 x64 Thread Safe
+php-7.4.13-Win32-vc15-x64
+
+2) Apache Module로서 설치 (반대말 stand-alone)
+httpd.conf에 맨 아래쪽에 다음을 추가 
+############## For PHP 7.4.13 ######################
+PHPIniDir "C:/_server/php-7.4.13-Win32-vc15-x64"
+AddHandler application/x-httpd-php .php
+LoadModule php7_module "C:/_server/php-7.4.13-Win32-vc15-x64/php7apache2_4.dll"
+
+
+*서버설치가 안될경우 확인사항
+1) 제대로 맞는 다운로드를 했는지? - 64bit/32bit, C++ runtime environment
+2) 경로확인 - 한글 또는 띄어쓰기 사용하지 말기
+3) httpd.conf - 서버홈 제대로 표시했는지..
+
+*아파치 웹서버 서비스 삭제
+1) 관리지권한 CMD open
+2) >sc delete Apache2.4 (엔터)
+2-1) 부팅
+3) 아파치 웹서버 재설치
+
+
+*서버환경 설치 계속
+1) PHP 환경설정
+    php.ini-development -> php.ini (copy 후 파일이름 수정)
+    `761줄: ;extension_dir = "ext" => ;빼고 
+    extension_dir = "C:/_server/php-7.4.13-Win32-vc15-x64/ext"
+    
+    extension=curl
+    extension=fileinfo
+    extension=gd2
+    extension=gettext
+    extension=mbstring
+    extension=exif      
+    extension=mysqli
+    extension=openssl
+    extension=pdo_mysql
+
+    `962줄 date.timezone = Asia/Seoul
+2) MySQL (DB) 설치 및 설정 https://dev.mysql.com/downloads/
+    `MySQL Installer 8.0.22 -> mysql-installer-web-community-8.0.22.0.msi
+    `choosing a setup type => server only
+    `Authentication Method => legacy
+    `Accounts and Roles => 1234, seoil 계정 추가
+    *MySQL 환경설정 => 숨긴항목 => C:\ProgramData\MySQL\MySQL Server 8.0\my.ini
+    `66번줄 => default-character-set=utf8
+    `99번줄 => character-set-server=utf8
+    *MySQL 재시작 => 제어판 > 관리도구 > 서비스
+3) phpMyAdmin (MySQL Client) https://www.phpmyadmin.net/
+    `config.sample.inc.php => copy 후 이름변경 => config.inc.php
+    `http://string-functions.com/length.aspx
+    *httpd.conf에 추가
+    Alias /mysql "C:/_server/phpMyAdmin-5.0.4-all-languages"
+    <Directory "C:/_server/phpMyAdmin-5.0.4-all-languages">
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+========================================================= 
+#4. Ajax, mashup (kakao map, tourAPI, kakao search) (4/6)
+
+https://developers.kakao.com/
+https://apis.map.kakao.com/
+http://api.visitkorea.or.kr/  => 국문 관광정보 서비스
+https://www.data.go.kr/
+https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide
+
+https://fontawesome.com/
+https://dummyimage.com/
+http://lorempixel.com/
+
+
+Ajax => 웹 페이지의 부분갱신
+Asynchrous => 비동기 (비동기 vs. 동기)
+javascript => 데이터 요청 및 처리
+and
+XML => 데이터 교환 (cf. JSON)
+
+*데이터 교환 표준 => 문법(syntax) + data container
+
+<age>20</age>
+age: 20
+
+http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey=Dpva6vJJ1NWDNGeibLpRCDAGFK8SpHKi%2BXz0cYf5UbV88z1wfNpKdrRYDUVfR%2FCTgZ3K3zPzGLLQJcifSI%2FCLg%3D%3D&keyword=%EA%B0%95%EC%9B%90&MobileOS=ETC&MobileApp=AppTesting
+
+
+https://meyerweb.com/eric/tools/dencoder/
+
+
+========================================================= 
+#5. PHP 핵심 - Form, CRUD, Cookie & Session, Login System (5/6)
+
+*CRUD
+https://www.w3schools.com/php/php_mysql_insert.asp
+https://www.w3schools.com/php/php_mysql_select.asp
+https://www.w3schools.com/php/php_mysql_update.asp
+https://www.w3schools.com/php/php_mysql_delete.asp
+
+*Cookie & Session
+https://www.w3schools.com/php/php_sessions.asp
+https://www.w3schools.com/php/php_cookies.asp
+
+CREATE TABLE member (
+    userid VARCHAR(10) PRIMARY KEY,
+    passwd CHAR(60) NOT NULL,
+    name VARCHAR(10) NOT NULL,
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+
+https://www.php.net/manual/en/function.password-hash.php
+https://www.codingfactory.net/11710
+
+<form action="" method="get|post"></form> 
+CRUD
+
+*HTTP 서버 특징
+1)Connectionless - 
+2)Stateless - cf. Stateful
+
+==> 로그인 => 유지(출입증) => Cookie & Session
+Cookie => storage 4KB
+
+========================================================= 
+6. Modern JS (6/6)
+`Sever-Sent Event, WebSocket, JS promise, webRTC, service worker
+`웹프레임워크 소개 (vue.js, angular.js, react.js, node.js)
+
+https://insights.stackoverflow.com/survey/2020
+
+*HTTP 통신
+1)HTTP Polling - 클라이언트가 HTTP 요청을 서버로 계속 보내 이벤트 내용을 전달받는 방식 - 오버헤드
+2)HTTP Long Polling - 클라이언트가 서버로 HTTP 요청을 보낸 후, 계속 기다리다 서버 응답시 이벤트 내용을 전달받는 방식
+3)HTTP Streaming - 클라이언트가 HTTP 요청을 보내면 연결을 해제하지 않은 상태에서 서버 응답 계속 수신
+
+https://medium.com/@joekarlsson/complete-guide-to-node-client-server-communication-b156440c029
+
+*Javascript API
+1)XHR(XMLHttpRequest) - 제대로 구성된 전체 HTTP 요청을 서버에 보내고, 전체 응답으로 응답 - 스트리밍 지원없음
+2)SSE(Server-Sent Event) - 짧은 대기시간, 서버->클라이언트 스트리밍 지원 - 단방향 + 텍스트 기반 전송
+3)WebSocket - TCP 연결을 통한 양방향 통신 - 텍스트 + 바이너리 전송
+4)WebRTC(Web Real Time Communication) - 웹 브라우저 간 플러그인이 필요없이 실시간 영상 및 음성, 데이터 통신에 대한 공개 표준
+5)JS Pormise - 비동기 작업이 맞이할 미래의 완료 또는 실패와 그 결과 값을 나타냅니다.
+6)Service Worker - 브라우저와 서버사이에서 네트워크의 request/response를 가로채어 캐시, IndexDB와 같은 브라우저 자원을 이용하여 오프라인 UX를 제공하는 프록시 워커 - 웹페이지와 분리되어 실행되는 백그라운드 프로그램
+`PWA(Progressive Web application) - 웹 기술로 모바일 애플리케이션과 같은 수준의 사용자 경험을 제공하려는 기술 - 서비스워커 + 웹앱매니페스트 (web app manifest)
+
+*Service Worker 활용분야
+1)Caching Strategies - Network or Cache, Cache Only, Cache update and refresh
+2)Web Push - Push and Retreive Payload, Push Payload, Push Tag, Push Clients
+3)Offlines - Offline Fallback, Local Download, Virtual Server, Load balancer
+
+`https://www.html5rocks.com/ko/tutorials/webrtc/basics/
+`https://www.hongkiat.com/blog/javascript-promise-object/
+
+
+`https://bestofjs.org/
+`https://scotch.io/bar-talk/vuejs-vs-jquery-use-cases-and-comparison-with-examples
+`https://www.codeinwp.com/blog/angular-vs-vue-vs-react/
+`https://vuejs.org/
+`https://kr.vuejs.org/
+
+

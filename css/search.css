@@ -1,0 +1,15 @@
+/* 도서 검색 기능*/
+#search { position: relative; width: 800px; height: 240px; margin: 0 auto; }
+#search_form1 { position: absolute; top: 30px; left: 40px; }
+#search_form1 .col1 { text-align: center; }
+#search_form1 .col2 { width: 230px; height: 20px; position: absolute; top: 130px; left: 10px;}
+#search_form1 .col3 { width: 60px; height: 25px; position: absolute; top: 130px; left: 250px;}
+
+#search_form2 { position: absolute; top: 30px; left: 450px; }
+#search_form2 .col1 { text-align: center;}
+#search_form2 .col2 { width: 230px; height: 20px; position: absolute; top: 130px; left: 10px;}
+#search_form2 .col3 { width: 60px; height: 25px; position: absolute; top: 130px; left: 250px;}
+
+
+#board_box { position: relative; width: 800px; margin: 0 auto; }
+#board_box h3 { margin-top: 30px;	padding: 10px; border-bottom: solid 2px #516e7f; font-size: 20px; }
